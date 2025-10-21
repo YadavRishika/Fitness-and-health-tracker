@@ -8,7 +8,7 @@ def set_goals():
     goals['Steps'] = int(input("Enter daily steps goal: "))
     goals['Calories'] = int(input("Enter daily calorie limit: "))
     goals['Water'] = float(input("Enter daily water intake goal (liters): "))
-    print("Goals updated successfully!\n")
+    print("Goals updated successfully.\n")
 
 def input_data():
     date = input("Enter today's date (YYYY-MM-DD): ")
@@ -16,7 +16,7 @@ def input_data():
     calories = int(input("How many calories did you consume today? "))
     water = float(input("How many liters of water did you drink today? "))
 
-    # calories burned estimate
+    # Estimate calories burned based on steps
     calories_burned = round(steps * 0.04, 2)
 
     daily_data = {
@@ -27,12 +27,12 @@ def input_data():
         'Calories Burned': calories_burned
     }
     tracker_data.append(daily_data)
-    print(f"\n✅ Data added for {date} successfully!\n")
+    print(f"\nData added for {date} successfully.\n")
 
 def display_data():
-    print("\n📊 Fitness and Health Tracker Summary:")
+    print("\nFitness and Health Tracker Summary:")
     if len(tracker_data) == 0:
-        print("No data entered yet!")
+        print("No data entered yet.")
         return
 
     for entry in tracker_data:
@@ -41,16 +41,15 @@ def display_data():
         print(f"Calories Consumed: {entry['Calories']} kcal (Goal: {goals['Calories']})")
         print(f"Water Consumed: {entry['Water']} liters (Goal: {goals['Water']})")
         print(f"Calories Burned (approx): {entry['Calories Burned']} kcal")
-        print("✅ Goals Met:")
-
-        print(f"   Steps: {'✅' if entry['Steps'] >= goals['Steps'] else '❌'}")
-        print(f"   Calories: {'✅' if entry['Calories'] <= goals['Calories'] else '❌'}")
-        print(f"   Water: {'✅' if entry['Water'] >= goals['Water'] else '❌'}")
+        print("Goals Met:")
+        print(f"   Steps: {'Yes' if entry['Steps'] >= goals['Steps'] else 'No'}")
+        print(f"   Calories: {'Yes' if entry['Calories'] <= goals['Calories'] else 'No'}")
+        print(f"   Water: {'Yes' if entry['Water'] >= goals['Water'] else 'No'}")
         print("-" * 40)
 
 def show_statistics():
     if len(tracker_data) == 0:
-        print("No data available for statistics!")
+        print("No data available for statistics.")
         return
 
     total_steps = sum(d['Steps'] for d in tracker_data)
@@ -66,18 +65,18 @@ def show_statistics():
     best_day = max(tracker_data, key=lambda x: x['Steps'])
     lowest_cal_day = min(tracker_data, key=lambda x: x['Calories'])
 
-    print("\n📈 Weekly Progress Summary:")
+    print("\nWeekly Progress Summary:")
     print(f"Total Days Tracked: {n}")
     print(f"Average Steps: {avg_steps:.0f}")
     print(f"Average Calories: {avg_calories:.0f}")
     print(f"Average Water Intake: {avg_water:.2f} L")
     print(f"Total Calories Burned: {total_burned:.0f} kcal")
-    print(f"🏆 Best Day (Most Steps): {best_day['Date']} with {best_day['Steps']} steps")
-    print(f"🔥 Lowest Calorie Day: {lowest_cal_day['Date']} with {lowest_cal_day['Calories']} kcal\n")
+    print(f"Best Day (Most Steps): {best_day['Date']} with {best_day['Steps']} steps")
+    print(f"Lowest Calorie Day: {lowest_cal_day['Date']} with {lowest_cal_day['Calories']} kcal\n")
 
 def plot_data():
     if len(tracker_data) == 0:
-        print("No data to plot!")
+        print("No data to plot.")
         return
     
     dates = [entry['Date'] for entry in tracker_data]
@@ -155,9 +154,9 @@ def main():
         elif choice == '5':
             plot_data()
         elif choice == '6':
-            print("👋 Exiting the program. Stay healthy!")
+            print("Exiting the program. Stay healthy.")
             break
         else:
-            print("Invalid choice! Try again.")
+            print("Invalid choice. Try again.")
 
 main()
